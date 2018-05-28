@@ -1,0 +1,37 @@
+{
+  "name": "non-blocking-bcrypt-nodejs",
+  "version": "1.0.0",
+  "description": "warper for bcrypt-nodejs that works on a difrrent thread to keep the crypto actions from starving the event loop.  ",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --timeout 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amit221/non-blocking-bcrypt-nodejs.git"
+  },
+  "keywords": [
+    "nodejs",
+    "bcrypt",
+    "crypto",
+    "hash",
+    "password",
+    "javascript",
+    "js",
+    "auth",
+    "encryption",
+    "hashing"
+  ],
+  "author": "Amit Wagner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amit221/non-blocking-bcrypt-nodejs/issues"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2"
+  },
+  "homepage": "https://github.com/amit221/non-blocking-bcrypt-nodejs#readme"
+}
