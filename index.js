@@ -39,7 +39,7 @@ exports.genHash = (salt, password) => {
     return bcryptChildRequest({method: 'genHash', salt, password});
 };
 exports.compare = async (password, hashedPassword) => {
-    if (!password || hashedPassword) {
+    if (!password || !hashedPassword) {
         return Promise.reject('password and hashedPassword are required');
     }
     return bcryptChildRequest({method: 'compare', password, hashedPassword});
