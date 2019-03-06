@@ -36,7 +36,7 @@ describe('getHash', () => {
     it('should throw an error salt and password are required ', async () => {
         try {
 
-            const {hash} = await nonBlockingBcrypt.genHash('sdsasdsafasf');
+            const {hash} = await nonBlockingBcrypt.genHash('sdsasdsafasf','asd');
         }
         catch (err) {
             expect(err).to.equal('Invalid salt version');
@@ -72,7 +72,7 @@ describe('getHash', () => {
     it('should throw an error salt and password are required ', async () => {
         try {
 
-            const {hash} = await nonBlockingBcrypt.genHash('sdsasdsafasf');
+            const {hash} = await nonBlockingBcrypt.genHash('sdsasdsafasf','sss');
         }
         catch (err) {
             expect(err).to.equal('Invalid salt version');
@@ -110,7 +110,7 @@ describe('compare', () => {
             const {hash} = await nonBlockingBcrypt.compare('sdsasdsafasf');
         }
         catch (err) {
-            expect(err).to.equal('Incorrect arguments');
+            expect(err).to.equal('password and hashedPassword are required');
 
         }
     });

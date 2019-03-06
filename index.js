@@ -1,19 +1,23 @@
-const {fork} = require('child_process');
-const bcryptChild = fork(__dirname + '/non-blocking-bcrypt-nodejs');
+const {fork} = require("child_process");
+const bcryptChild = fork(__dirname + "/non-blocking-bcrypt-nodejs");
 const q = {};
 
 const genMicroTime = () => {
-    return Number(process.hrtime().join(''));
+    return Number(process.hrtime().join(""));
 };
 
-bcryptChild.on('message', msg => {
+bcryptChild.on("message", msg => {
+    const microTime = msg.microTime;
     if (msg.err !== undefined) {
-        q[msg.microTime].reject(msg.err);
-        delete  q[msg.microTime];
+        q[microTime].reject(msg.err);
+        delete  q[microTime];
         return;
     }
-    q[msg.microTime].resolve(msg);
-    delete  q[msg.microTime];
+    if (msg.match !== undefined) {
+        msg = msg.match;
+    }
+    q[microTime].resolve(msg);
+    delete  q[microTime];
 });
 
 const bcryptChildRequest = (params) => {
@@ -30,31 +34,31 @@ const bcryptChildRequest = (params) => {
 };
 
 exports.genSalt = (rounds = 10) => {
-    return bcryptChildRequest({method: 'genSalt', rounds});
+    return bcryptChildRequest({method: "genSalt", rounds});
 };
 exports.genHash = (salt, password) => {
-    if (!salt || password) {
-        return Promise.reject('salt and password are required');
+    if (!salt || !password) {
+        return Promise.reject("salt and password are required");
     }
-    return bcryptChildRequest({method: 'genHash', salt, password});
+    return bcryptChildRequest({method: "genHash", salt, password});
 };
 exports.compare = async (password, hashedPassword) => {
     if (!password || !hashedPassword) {
-        return Promise.reject('password and hashedPassword are required');
+        return Promise.reject("password and hashedPassword are required");
     }
-    return bcryptChildRequest({method: 'compare', password, hashedPassword});
+    return bcryptChildRequest({method: "compare", password, hashedPassword});
 };
 exports.saltAndHash = async (password, rounds) => {
     if (!password) {
-        return Promise.reject('password is required');
+        return Promise.reject("password is required");
     }
-    return bcryptChildRequest({method: 'saltAndHash', password, rounds});
+    return bcryptChildRequest({method: "saltAndHash", password, rounds});
 };
 exports.getRounds = async (encrypted) => {
     if (!encrypted) {
-        return Promise.reject('password is required');
+        return Promise.reject("password is required");
     }
-    return bcryptChildRequest({method: 'compare', encrypted});
+    return bcryptChildRequest({method: "compare", encrypted});
 };
 
 

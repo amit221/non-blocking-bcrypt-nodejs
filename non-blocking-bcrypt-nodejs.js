@@ -70,7 +70,7 @@ process.on('message', async (msg) => {
                 break;
             }
             case 'compare' : {
-                result = await compare(msg.password, msg.hashedPassword);
+                result.match = await compare(msg.password, msg.hashedPassword);
                 break;
             }
             case 'getRounds' : {
@@ -80,6 +80,7 @@ process.on('message', async (msg) => {
 
 
         }
+
         result.microTime = msg.microTime;
         process.send(result);
 
