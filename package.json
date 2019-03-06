@@ -1,6 +1,6 @@
 {
   "name": "non-blocking-bcrypt-nodejs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "warper for bcrypt-nodejs that works on a difrrent thread to keep the crypto actions from starving the event loop.  ",
   "main": "index.js",
   "scripts": {
