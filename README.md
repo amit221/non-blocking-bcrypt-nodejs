@@ -1,5 +1,5 @@
 <h1>non-blocking-bcrypt-nodejs</h1>
-warper for <a href='https://www.npmjs.com/package/bcrypt-nodejs'>bcrypt-nodejs</a> that works on a difrrent thread to keep the crypto actions from starving the event loop.
+warper for <a href='https://www.npmjs.com/package/bcrypt-nodejs'>bcrypt-nodejs</a> that works on a sub process to keep the crypto actions from starving the event loop.
 
 
 <h2>Limitations</h2>
